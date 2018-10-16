@@ -4,26 +4,31 @@
     <meta charset="UTF-8">
     <title>Numeros aleatorios</title>
     <style>
+        /*h1: alineado en el centro, color marron, sombra y tamaño de letra a 80px*/
         h1{
             text-align: center;
             color: brown;
             text-shadow: 0 0 50px;
             font-size: 80px;
         }
+        /*Los div alineados en el centro*/
         div{
             text-align: center;
         }
-        
+        /*La imagen alineada al centro, aunque no era necesario ya que los div se alinean ya en el centro*/
         #otra{
             text-align: center;
             color: darkgreen;
         }
+        
        #numeros{
             text-align: right;
         }
+        /*Imagen de fondo*/
         body{
             background-image: url(imagen.jpeg);
         }
+        /*Tamaño de letra a 30px*/
         p{
             font-size: 30px;
         }
@@ -36,31 +41,39 @@
         }
     </style>
     <script>
+        //Es el algoritmo del calculo del num aleatorio
 function aleatorio(min,max){
   return Math.floor( (Math.random()* (max-min+1)) ) + min;
     
 }
+    //Esta funcion se encargara de calcularlo a partir de dos variables, que tendran el valor segun se escriba en el input del html
         function calcula_aleatorio(){
 		min = parseInt(document.getElementById("min").value);
 		max = parseInt(document.getElementById("max").value);
 		resultado = aleatorio(min,max);    
 		document.getElementById("demo").innerHTML = resultado ;
+            //creamos dos arrays para los archivos de imagen y sonido
         var numeros = ["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez"];  
         var imagenes = ["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez"];
+            //Comprueba que lo que se escribe en el input son numeros
          if( isNaN(min) || isNaN(max)){
              document.getElementById("demo").innerHTML = "EL MINIMO Y MAXIMO DEBEN SER NUMEROS"
          }
+            //Comprueba que el min es menor al maximo
             else{
                 if(min > max){
                     document.getElementById("demo").innerHTML = "EL MINIMO DEBE SER MENOR O IGUAL AL MAXIMO"
                 }
+                //Si el resultado esta entre 0 y 10
                  else {
                        if(resultado >= 0 && resultado <= 10){
+                          // Cargara imagen y sonido correspondientes
                        document.getElementById("todos").src= "sonidos/" + numeros[resultado] + ".ogg";
                         document.getElementById("sonidos").load();
                               document.getElementById("imagen").src= "imagenes/" + imagenes[resultado] + ".png";
                            document.getElementById("imagen").alt = imagenes[resultado];
                        }
+                     //si no es asi, cargara otras imagenes y sonidos distintos
                      else{
                          document.getElementById("todos").src="sonidos/numeros.ogg"; 
                           document.getElementById("imagen").src= "imagenes/numeros.png"
@@ -80,7 +93,7 @@ function aleatorio(min,max){
 <body>
   
   <h1>GENERANDO NUMEROS ALEATORIOS</h1>
- 
+ <!-- Aqui se introduciran los datos-->
   <div>
   <p>Introduzca un mínimo: <input type="text" id="min" onkeypress='return validNumericos(event)' /></p>
   <p>Introduzca un máximo: <input type="text" id="max" onkeypress='return validaNumericos(event)' /></p>
@@ -88,14 +101,15 @@ function aleatorio(min,max){
     </div>
     
     <br/>
+    <!--Aqui se mostrara el resultado-->
     <div id="demo"></div> 
-
+<!--Aqui el sonido-->
 <audio id="sonidos" autoplay>
  
    <source id="todos" src="sonidos/numeros.ogg">
 
     </audio>
-    
+    <!--Y la imagen-->
 <div id="otra">
    <img id="imagen" src="imagenes/numeros.png" alt="numeros">
       
