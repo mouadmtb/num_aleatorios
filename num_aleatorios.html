@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Numeros aleatorios</title>
+    <style>
+        h1{
+            text-align: center;
+            color: brown;
+            text-shadow: 0 0 50px;
+            font-size: 80px;
+        }
+        div{
+            text-align: center;
+        }
+        }
+        #otra{
+            text-align: center;
+            color: darkgreen;
+        }
+       #numeros{
+            text-align: right;
+        }
+        body{
+            background-image: url(imagen.jpeg);
+        }
+        p{
+            font-size: 30px;
+        }
+        #otra{
+            border-color: blue;
+        }
+        #demo{
+            text-shadow: red;
+            font-family: fantasy;
+            font-size: 50px;
+        }
+    </style>
+    <script>
+function aleatorio(min,max){
+  return Math.floor( (Math.random()* (max-min+1)) ) + min;
+    
+}
+        function calcula_aleatorio(){
+		min = parseInt(document.getElementById("min").value);
+		max = parseInt(document.getElementById("max").value);
+		resultado = aleatorio(min,max);    
+		document.getElementById("demo").innerHTML = resultado ;
+        var numeros = ["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez"];  
+        var imagenes = ["cero","uno","dos","tres","cuatro","cinco","seis","siete","ocho","nueve","diez"];
+         if( isNaN(min) || isNaN(max)){
+             document.getElementById("demo").innerHTML = "EL MINIMO Y MAXIMO DEBEN SER NUMEROS"
+         }
+            else{
+                if(min > max){
+                    document.getElementById("demo").innerHTML = "EL MINIMO DEBE SER MENOR O IGUAL AL MAXIMO"
+                }
+                 else {
+                       if(resultado >= 0 && resultado <= 10){
+                       document.getElementById("todos").src= "sonidos/" + numeros[resultado] + ".ogg";
+                        document.getElementById("sonidos").load();
+                              document.getElementById("imagen").src= "imagenes/" + imagenes[resultado] + ".png";
+                           document.getElementById("imagen").alt = imagenes[resultado];
+                       }
+                     else{
+                         document.getElementById("todos").src="sonidos/numeros.ogg"; 
+                          document.getElementById("imagen").src= "imagenes/numeros.png"
+                         
+                     }
+                        
+                } 
+                
+                
+            }
+}
+
+        
+        
+    </script>
+</head>
+<body>
+  
+  <h1>GENERANDO NUMEROS ALEATORIOS</h1>
+ 
+  <div>
+  <p>Introduzca un mínimo: <input type="text" id="min" onkeypress='return validNumericos(event)' /></p>
+  <p>Introduzca un máximo: <input type="text" id="max" onkeypress='return validaNumericos(event)' /></p>
+   <button onclick = "calcula_aleatorio()" type="submit">Prueba!!</button>
+    </div>
+    
+    <br/>
+    <div id="demo"></div> 
+
+<audio id="sonidos" autoplay>
+ 
+   <source id="todos" src="sonidos/numeros.ogg">
+
+    </audio>
+    
+<div id="otra">
+   <img id="imagen" src="imagenes/numeros.png" alt="numeros">
+      
+</div>
+</body>
+</html>
+
+
+      
